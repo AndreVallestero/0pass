@@ -4,7 +4,7 @@ description = "A cross platform CLI password manager written in Rust intended as
 repository = "https://github.com/AndreVallestero/0pass"
 readme = "README.md"
 license = "AGPLv3"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Andre Vallestero <andrevallestero@gmail.com>"]
 edition = "2018"
 

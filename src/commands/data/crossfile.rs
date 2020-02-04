@@ -2,7 +2,7 @@
 // System-agnostically reads and writes the data file in the appropriate directory
 
 use dirs::config_dir;
-use std::fs::{create_dir_all, OpenOptions};
+use std::fs::{create_dir_all, OpenOptions, read};
 use std::io::{Error, ErrorKind, prelude::*};
 
 const DIR:&str = env!("CARGO_PKG_NAME");
@@ -20,16 +20,12 @@ pub fn read_file() -> std::io::Result<Vec<u8>> {
 
     // Create the file if it doesn't exist, then open it
     path.push(FILENAME);
-    let mut file = OpenOptions::new()
-        .write(true)
-        .create(true)
-        .read(true)
-        .open(&path)?;
-    
-    // Read file into string buffer
-    let mut data_buffer = Vec::new();
-    file.read_to_end(&mut data_buffer)?;
-    Ok(data_buffer)
+
+    // Read file, return empty vec if file does not exist
+    match read(&path) {
+        Err(err) if err.kind() == ErrorKind::NotFound => Ok(Vec::new()),
+        result => result
+    }
 }
 
 pub fn write_file(data:&Vec<u8>) -> std::io::Result<()> {
