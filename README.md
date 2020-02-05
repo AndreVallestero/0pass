@@ -37,4 +37,5 @@ A cross platform CLI password manager written in Rust intended as a backend for 
 - [label] ID that represents the fields of data
 
 ## TODO:
+- (CRITICAL) Use a proper key derivation function rather than SHA256
 - Add a timeout where no password is needed. Extending the current timeout will require a password
